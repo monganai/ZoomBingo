@@ -2,7 +2,9 @@ const TRACER = require('dd-trace').init({
   service: 'bingo',
   version: '1.0',
   logInjection: true,
-  debug: false
+  debug: false,
+  profiling: true,
+  env: 'dev'
 });
 
 const logger = require('./logger');
@@ -22,6 +24,11 @@ app.use(express.static(__dirname));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/main.html");
+});
+
+
+app.get("/start", (req, res) => {
+  res.sendFile(__dirname + "/start_screen.html");
 });
 
 

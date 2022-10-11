@@ -66,5 +66,3 @@ var intervalId = window.setInterval(function () {
     
     return xmlHttp.responseText;
 }, 5000);
-
-
