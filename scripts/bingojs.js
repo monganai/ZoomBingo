@@ -58,8 +58,12 @@ var intervalId = window.setInterval(function () {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false); // false for synchronous request
     xmlHttp.send(null);
-    if (xmlHttp.responseText != "Temporary Redirect")
+    if (xmlHttp.responseText != "Temporary Redirect"){
         document.getElementById('results').innerHTML = xmlHttp.responseText;
+    } else{
+        document.getElementById('results').innerHTML = "Waiting for game to start"
+    }
+    
     return xmlHttp.responseText;
 }, 5000);
 

@@ -15,5 +15,5 @@ function newGame() {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false);
     xmlHttp.send(null);
-    nextRand()
+    document.getElementById('List').innerHTML = "Waiting for game to start"
 }
