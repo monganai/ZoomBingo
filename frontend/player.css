@@ -1,0 +1,126 @@
+body {
+  background: #1abc9c;
+  background-image: url('https://www.gsn.com/common/html/images/bingo_bg.png?v=1');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  display: flex;
+  height: 100vh;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+h1,
+p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20pt;
+  font-weight: 600;
+  margin: 0 auto;
+  text-align: center;
+  padding: 30px;
+  color: white;
+}
+
+p a {
+  text-decoration: none;
+  color: #f1c40f;
+}
+
+#squarefree {
+  font-family: Helvetica;
+  margin: 0 auto;
+  background: #5dc4de;
+  text-align: center;
+  font-weight: 600;
+  font-size: 15pt;
+}
+
+#bingotable {
+  margin: 0 auto;
+  text-align: center;
+  width: 400px;
+  height: 400px;
+  border-collapse: collapse;
+  background: white;
+}
+
+th,
+td {
+  font-family: Helvetica;
+  margin: 0 auto;
+  text-align: center;
+  border: 3px solid black;
+  width: 20%;
+}
+
+.orange {
+  background: #9b59b6;
+}
+
+
+div.a {
+  font-family: 'Roboto', sans-serif;
+  font-size: 50pt;
+  font-weight: 600;
+  margin: 0 auto;
+  text-align: center;
+  padding: 30px;
+  color: white;
+  max-width: 1000px;
+  inline-size: 1000px;
+  overflow-wrap: break-word;
+}
+
+div.b {
+  word-wrap: break-word;
+  word-wrap: normal;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20pt;
+  font-weight: 600;
+  margin: 0 auto;
+  text-align: center;
+  padding: 100px;
+  color: white;
+}
+
+a {
+
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 10pt;
+  font-weight: 600;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+  color: white;
+
+}
+
+
+.button {
+  border: none;
+  color: rgb(147, 5, 179);
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+.button {
+  background-color: #ffffff;
+}
+
+
+footer {
+
+  display: table;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+
+}

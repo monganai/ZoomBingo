@@ -1,7 +1,7 @@
 var usedNums = new Array(76);
 
 function newCard() {
-    for (var i = 0; i < 24; i++) {  //<--always this code for loops. change in red
+    for (var i = 0; i < 24; i++) {
         setSquare(i);
     }
 }
@@ -52,7 +52,6 @@ function tableClick() {
     }
 }
 
-
 function getCalledNums() {
     theUrl='http://mongan.duckdns.org/callednumbers'
     //theUrl = 'http://localhost:3000/callednumbers'
@@ -67,39 +66,45 @@ var intervalId = window.setInterval(function () {
     response = getCalledNums()
     if (response != "Temporary Redirect") {
         calledNums = response.split(',');
-
-
-        document.getElementById('results').innerHTML = response;
-
+        number = calledNums[calledNums.length - 1]
+        number = number.replace('[', '');
+        number = number.replace(']', '');
+        number = ">> " + number + " <<"
+        document.getElementById('results').innerHTML = number;
     } else {
         document.getElementById('results').innerHTML = "Waiting for game to start"
     }
 }, 5000);
-
-
 
 function validate() {
 
     myNums = [];
     calledNums = [];
 
-    var table = document.getElementById("bingotable");
-    if (table != null) {
-        for (var i = 1; i < table.rows.length; i++) {
-            for (var j = 0; j < table.rows[i].cells.length; j++)
-                if (i == 3 && j == 2) {
-                    //this is the centre bingo square!
-                } else {
-                    myNums.push(table.rows[i].cells[j].innerHTML)
-                }
-        }
-        response = getCalledNums();
-        if (response != "Temporary Redirect") {
-            response = response.slice(1, -1);
-            calledNums = response.split(',');
-            var isEqual = (JSON.stringify(calledNums.sort()) === JSON.stringify(myNums.sort()));
-            if (isEqual) {
-                window.alert("Winner! Your the Bingo master!");
+
+    response = getCalledNums();
+    if (response != "Temporary Redirect") {
+        response = response.slice(1, -1);
+        calledNums = response.split(',');
+
+        var table = document.getElementById("bingotable");
+        if (table != null) {
+            for (var i = 1; i < table.rows.length; i++) {
+                for (var j = 0; j < table.rows[i].cells.length; j++)
+                    if (i == 3 && j == 2) {
+                        //this is the centre bingo square!
+                    } else {
+                        myNums.push(table.rows[i].cells[j].innerHTML)
+                        if (calledNums.includes(table.rows[i].cells[j].innerHTML)) {
+                            document.getElementById(table.rows[i].cells[j].id).style.backgroundColor = "Purple";
+                        }
+                    }
+            }
+
+            const result = myNums.every(val => calledNums.includes(val))
+            if (result && myNums.length == 24) {
+                document.getElementById('btitle').innerHTML = "!!!! BINGO WINNER !!!!"
+
             }
             else {
                 window.alert("Not a winning card .... yet ಠ_ಠ ")
@@ -109,6 +114,3 @@ function validate() {
 
     }
 }
-
-
-

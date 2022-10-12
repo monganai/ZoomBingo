@@ -14,7 +14,7 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var calledNumbers = []; //array of numbers which have already been called
+var calledNumbers = []; //array placeholder of numbers which have already been called
 
 
 app.listen(3000, () => {
@@ -22,15 +22,28 @@ app.listen(3000, () => {
 });
 app.use(express.static(__dirname));
 
+
+// Frontend routes
+
+
+// Main player page
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/main.html");
+  res.sendFile(__dirname + "/frontend/player.html");
 });
 
-
+// Start screen
 app.get("/start", (req, res) => {
-  res.sendFile(__dirname + "/start_screen.html");
+  res.sendFile(__dirname + "/frontend/start_screen.html");
 });
 
+// Host screen
+app.get("/host", (req, res) => {
+  res.sendFile(__dirname + "/frontend/host.html");
+});
+
+// Game Routes
+
+// /called numbers retuns the list of numbers which have been called
 
 app.get("/callednumbers", (req, res) => {
   if (calledNumbers.length > 0) {
@@ -46,6 +59,7 @@ app.get("/callednumbers", (req, res) => {
   }
 });
 
+// /Call allows a number to be called externally
 app.post('/call', (req, res) => {
   const click = { clickTime: new Date() };
   console.log(click);
@@ -56,16 +70,12 @@ app.post('/call', (req, res) => {
   res.sendStatus(200);
 });
 
-
-app.get("/host", (req, res) => {
-  res.sendFile(__dirname + "/host.html");
-});
-
-
+// Returns the next random number for the game
 app.get("/nextrand", (req, res) => {
   validNumber = false
   while (!validNumber) {
-    next = Math.floor(Math.random() * 76);
+    next = Math.floor(Math.random() * 78);
+    next = next+1
     if (!calledNumbers.includes(next)) {
       LOGGER.info('Next number is: ' + next)
       calledNumbers.push(next)
@@ -75,8 +85,8 @@ app.get("/nextrand", (req, res) => {
     }
     else {
       LOGGER.info('Number has already been called: ' + next)
-
-      if (calledNumbers.length > 75) {
+console.log(calledNumbers.length)
+      if (calledNumbers.length >= 78) {
         validNumber = true
         res.send("gameOver")
 
@@ -87,6 +97,7 @@ app.get("/nextrand", (req, res) => {
   }
 });
 
+// Resets the current game
 
 app.get("/newgame", (req, res) => {
   if (calledNumbers.length > 0) {

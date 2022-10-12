@@ -32,9 +32,9 @@
 
 	<title>Bingo</title>
 
-	<link rel="stylesheet" type="text/css" href="bingocss.css" />
+	<link rel="stylesheet" type="text/css" href="/frontend/player.css" />
 
-	<script type="text/javascript" src="scripts/bingojs.js"></script>
+	<script type="text/javascript" src="scripts/player.js"></script>
 
 </head>
 
@@ -43,7 +43,7 @@
 
 	<div id="container">
 		<div id="header">
-			<h1>! Fun Friday Bingo !</h1>
+			<h1 id="btitle">! Fun Friday Bingo !</h1>
 		</div>
 		<div id="content">
 			<table id="bingotable">
@@ -92,84 +92,11 @@
 			</table>
 		</div>
 
-
-
-		<style>
-			div.a {
-				font-family: 'Roboto', sans-serif;
-				font-size: 18pt;
-				font-weight: 600;
-				margin: 0 auto;
-				text-align: center;
-				padding: 30px;
-				color: white;
-				max-width: 1000px;
-				inline-size: 1000px;
-				overflow-wrap: break-word;
-			}
-
-			div.b {
-				word-wrap: break-word;
-				word-wrap: normal;
-				font-family: 'Roboto', sans-serif;
-				font-size: 20pt;
-				font-weight: 600;
-				margin: 0 auto;
-				text-align: center;
-				padding: 100px;
-				color: white;
-			}
-
-			a {
-
-
-				font-family: 'Roboto', sans-serif;
-				font-size: 10pt;
-				font-weight: 600;
-				margin: 0 auto;
-				text-align: center;
-				padding: 10px;
-				color: white;
-
-			}
-
-
-			footer {
-
-				display: table;
-				text-align: center;
-				margin-left: auto;
-				margin-right: auto;
-
-			}
-		</style>
-
 		<div id="results" class="a"> Waiting on game to start! </div> <br>
 
 		<div style="text-align:center">
 			<button id="validate" class=button onclick="validate()">Validate card</button>
 		</div>
-
-
-
-		<style>
-			.button {
-				border: none;
-				color: rgb(147, 5, 179);
-				padding: 5px 10px;
-				text-align: center;
-				text-decoration: none;
-				display: inline-block;
-				font-size: 16px;
-				margin: 4px 2px;
-				cursor: pointer;
-				margin-bottom: 25px;
-			}
-
-			.button {
-				background-color: #ffffff;
-			}
-		</style>
 
 </body>
 
