@@ -52,17 +52,63 @@ function tableClick() {
     }
 }
 
-var intervalId = window.setInterval(function () {
+
+function getCalledNums() {
     theUrl='http://mongan.duckdns.org/callednumbers'
     //theUrl = 'http://localhost:3000/callednumbers'
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false); // false for synchronous request
     xmlHttp.send(null);
-    if (xmlHttp.responseText != "Temporary Redirect"){
-        document.getElementById('results').innerHTML = xmlHttp.responseText;
-    } else{
+    return xmlHttp.responseText;
+}
+
+
+var intervalId = window.setInterval(function () {
+    response = getCalledNums()
+    if (response != "Temporary Redirect") {
+        calledNums = response.split(',');
+
+
+        document.getElementById('results').innerHTML = response;
+
+    } else {
         document.getElementById('results').innerHTML = "Waiting for game to start"
     }
-    
-    return xmlHttp.responseText;
 }, 5000);
+
+
+
+function validate() {
+
+    myNums = [];
+    calledNums = [];
+
+    var table = document.getElementById("bingotable");
+    if (table != null) {
+        for (var i = 1; i < table.rows.length; i++) {
+            for (var j = 0; j < table.rows[i].cells.length; j++)
+                if (i == 3 && j == 2) {
+                    //this is the centre bingo square!
+                } else {
+                    myNums.push(table.rows[i].cells[j].innerHTML)
+                }
+        }
+        response = getCalledNums();
+        if (response != "Temporary Redirect") {
+            response = response.slice(1, -1);
+            calledNums = response.split(',');
+            var isEqual = (JSON.stringify(calledNums.sort()) === JSON.stringify(myNums.sort()));
+            if (isEqual) {
+                window.alert("Winner! Your the Bingo master!");
+            }
+            else {
+                window.alert("Not a winning card .... yet ಠ_ಠ ")
+            }
+
+        }
+
+    }
+}
+
+
+

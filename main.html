@@ -96,14 +96,16 @@
 
 		<style>
 			div.a {
-				word-wrap: normal;
 				font-family: 'Roboto', sans-serif;
-				font-size: 20pt;
+				font-size: 18pt;
 				font-weight: 600;
 				margin: 0 auto;
 				text-align: center;
 				padding: 30px;
 				color: white;
+				max-width: 1000px;
+				inline-size: 1000px;
+				overflow-wrap: break-word;
 			}
 
 			div.b {
@@ -144,7 +146,31 @@
 
 		<div id="results" class="a"> Waiting on game to start! </div> <br>
 
-	
+		<div style="text-align:center">
+			<button id="validate" class=button onclick="validate()">Validate card</button>
+		</div>
+
+
+
+		<style>
+			.button {
+				border: none;
+				color: rgb(147, 5, 179);
+				padding: 5px 10px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 16px;
+				margin: 4px 2px;
+				cursor: pointer;
+				margin-bottom: 25px;
+			}
+
+			.button {
+				background-color: #ffffff;
+			}
+		</style>
+
 </body>
 
 <footer>

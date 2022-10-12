@@ -5,7 +5,13 @@ function nextRand() {
     xmlHttp.open("GET", theUrl, false);
     xmlHttp.send(null);
     console.log(xmlHttp.response)
-    document.getElementById('List').innerHTML = xmlHttp.response
+
+    if (xmlHttp != "gameOver") {
+        document.getElementById('List').innerHTML = xmlHttp.response
+    }
+
+
+
 }
 
 

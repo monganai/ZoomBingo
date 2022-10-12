@@ -73,8 +73,14 @@ app.get("/nextrand", (req, res) => {
       var JsonList = JSON.stringify(calledNumbers);
       res.send(JsonList)
     }
-    else{
+    else {
       LOGGER.info('Number has already been called: ' + next)
+
+      if (calledNumbers.length > 75) {
+        validNumber = true
+        res.send("gameOver")
+
+      }
 
     }
 
