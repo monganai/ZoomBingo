@@ -1,5 +1,5 @@
 body {
-  background: #1abc9c;
+  background: #aa0d83;;
   background-image: url('https://www.gsn.com/common/html/images/bingo_bg.png?v=1');
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -14,7 +14,7 @@ body {
 h1,
 p {
   font-family: 'Roboto', sans-serif;
-  font-size: 20pt;
+  font-size: 32pt;
   font-weight: 600;
   margin: 0 auto;
   text-align: center;
@@ -61,7 +61,7 @@ td {
 
 div.a {
   font-family: 'Roboto', sans-serif;
-  font-size: 50pt;
+  font-size: 32pt;
   font-weight: 600;
   margin: 0 auto;
   text-align: center;

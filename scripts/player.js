@@ -45,9 +45,9 @@ function tableClick() {
                         this.style.backgroundColor = "white";
                     } else {
                         this.style.backgroundColor = "green";
-                    }
+                 }
 
-                };
+            };
         }
     }
 }
@@ -61,6 +61,19 @@ function getCalledNums() {
     return xmlHttp.responseText;
 }
 
+function clearCardColour(){
+var table = document.getElementById("bingotable");
+if (table != null) {
+    for (var i = 1; i < table.rows.length; i++) {
+        for (var j = 0; j < table.rows[i].cells.length; j++)
+            if (i == 3 && j == 2) {
+                //this is the centre bingo square!
+            } else {
+                document.getElementById(table.rows[i].cells[j].id).style.backgroundColor = "white";   
+            }
+    }
+}
+}
 
 var intervalId = window.setInterval(function () {
     response = getCalledNums()
@@ -69,10 +82,11 @@ var intervalId = window.setInterval(function () {
         number = calledNums[calledNums.length - 1]
         number = number.replace('[', '');
         number = number.replace(']', '');
-        number = ">> " + number + " <<"
+        number = "Next Number is > " + number + " <"
         document.getElementById('results').innerHTML = number;
     } else {
-        document.getElementById('results').innerHTML = "Waiting for game to start"
+        document.getElementById('results').innerHTML = "Waiting for the game to start!"
+        clearCardColour()
     }
 }, 5000);
 
@@ -80,8 +94,6 @@ function validate() {
 
     myNums = [];
     calledNums = [];
-
-
     response = getCalledNums();
     if (response != "Temporary Redirect") {
         response = response.slice(1, -1);
@@ -98,6 +110,9 @@ function validate() {
                         if (calledNums.includes(table.rows[i].cells[j].innerHTML)) {
                             document.getElementById(table.rows[i].cells[j].id).style.backgroundColor = "Purple";
                         }
+                        else{
+                            document.getElementById(table.rows[i].cells[j].id).style.backgroundColor = "white";
+                        }
                     }
             }
 
@@ -107,7 +122,7 @@ function validate() {
 
             }
             else {
-                window.alert("Not a winning card .... yet ಠ_ಠ ")
+               // window.alert("Not a winning card .... yet ಠ_ಠ ")
             }
 
         }

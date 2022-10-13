@@ -49,12 +49,10 @@ app.get("/callednumbers", (req, res) => {
   if (calledNumbers.length > 0) {
     var JsonList = JSON.stringify(calledNumbers);
     LOGGER.info('Current numbers are: ' + calledNumbers)
-
     res.send(JsonList)
   }
   else {
     LOGGER.info('Waiting for the host to start the game')
-
     res.sendStatus(307)
   }
 });
@@ -85,15 +83,11 @@ app.get("/nextrand", (req, res) => {
     }
     else {
       LOGGER.info('Number has already been called: ' + next)
-console.log(calledNumbers.length)
       if (calledNumbers.length >= 78) {
         validNumber = true
         res.send("gameOver")
-
       }
-
     }
-
   }
 });
 
