@@ -1,6 +1,18 @@
 var usedNums = new Array(76);
+var gameCode;
+
+var urlSwitch = 'http://localhost:3000'
+//var urlSwitch = 'http://mongan.duckdns.org'
+
+function initGame(){
+   currUrl =  document.URL
+   code = currUrl.split('=')
+   gameCode=code[code.length -1]
+}
+
 
 function newCard() {
+    initGame()
     for (var i = 0; i < 24; i++) {
         setSquare(i);
     }
@@ -53,12 +65,12 @@ function tableClick() {
 }
 
 function getCalledNums() {
-    theUrl='http://mongan.duckdns.org/callednumbers'
-    //theUrl = 'http://localhost:3000/callednumbers'
+    theUrl = urlSwitch+'/bingo/callednumbers'
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false); // false for synchronous request
     xmlHttp.send(null);
     return xmlHttp.responseText;
+
 }
 
 function clearCardColour(){
@@ -91,6 +103,7 @@ var intervalId = window.setInterval(function () {
 }, 5000);
 
 function validate() {
+
 
     myNums = [];
     calledNums = [];

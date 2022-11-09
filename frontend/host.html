@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<script type="text/javascript" src="scripts/host.js"></script>
+<script type="text/javascript" src="/scripts/host.js"></script>
 <link rel="stylesheet" type="text/css" href="/frontend/host.css" />
 <head>
   <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript">
@@ -31,7 +31,9 @@
 
 <title>Bingo</title>
 
-<body>
+<body onload="setupGame()">
+
+
 
   <p align="center"><iframe src="https://giphy.com/embed/z0JFNTUyOBx62XBLag" width="400" height="400" frameBorder="0"
       class="giphy-embed" allowFullScreen></iframe>
@@ -43,13 +45,23 @@
 
     <a id="List">Click below to start</a>
 
-  <div class="buttons">
+  <div id="hostDiv" class="buttons">
     <div class="action_btn">
     <button id="Next" onclick="nextRand()" class="action_btn">Next number!</button>
-    <button id="New" onclick="newGame()" class="action_btn">New Game!</button>
+    <button id="New" onclick="newGame()" class="action_btn">Reset Game!</button>
   </div>
 
 </div>
+
+
+  <div id="setupDiv" class="buttons">
+    <div class="action_btn">
+    <button id="getgc" onclick="getGameCode()" class="action_btn">Get Game Code</button>
+    <button id="New" onclick="startGame()" class="action_btn">Host Game!</button>
+  </div>
+
+
+
 
 
 </body>

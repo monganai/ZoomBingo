@@ -1,6 +1,32 @@
+var gameCode;
+var urlSwitch = 'http://localhost:3000'
+//var urlSwitch = 'http://mongan.duckdns.org'
+
+
+function setupGame(){
+    var x = document.getElementById("hostDiv");
+    x.style.display = "none";
+}
+
+function startGame(){
+    var x = document.getElementById("hostDiv");
+    x.style.display = "block";
+    var x = document.getElementById("setupDiv");
+    x.style.display = "none";    
+}
+
+function getGameCode(){
+    theUrl= urlSwitch+'/bingo/gamecode'
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", theUrl, false);
+    xmlHttp.send(null);
+    console.log("game code on host screen: " + xmlHttp.response)
+    document.getElementById('List').innerHTML = 'Game code is: ' + xmlHttp.response
+    gameCode=xmlHttp.response
+
+}
 function nextRand() {
-    theUrl='http://mongan.duckdns.org/nextrand'
-    //theUrl = 'http://localhost:3000/nextrand'
+    theUrl= urlSwitch+'/bingo/nextrand?gamecode='+ gameCode
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false);
     xmlHttp.send(null);
@@ -20,10 +46,8 @@ function nextRand() {
 
     }
 }
-
 function newGame() {
-    theUrl='http://mongan.duckdns.org/newgame'
-    //theUrl = 'http://localhost:3000/newgame'
+    theUrl = urlSwitch+'/bingo/newgame'
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false);
     xmlHttp.send(null);

@@ -14,7 +14,10 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+var totalCallednumbers = [] // array to hold arrays of called numbers
 var calledNumbers = []; //array placeholder of numbers which have already been called
+var gameCodes = [];
 
 
 app.listen(3000, () => {
@@ -27,25 +30,45 @@ app.use(express.static(__dirname));
 
 
 // Main player page
-app.get("/", (req, res) => {
+app.get("/bingo/play", (req, res) => {
+  let gameCode = req.query.gamecode;
+  console.log('Got code:', gameCode);
   res.sendFile(__dirname + "/frontend/player.html");
 });
 
 // Start screen
-app.get("/start", (req, res) => {
+app.get("/bingo/", (req, res) => {
   res.sendFile(__dirname + "/frontend/start_screen.html");
 });
 
 // Host screen
-app.get("/host", (req, res) => {
+app.get("/bingo/host", (req, res) => {
   res.sendFile(__dirname + "/frontend/host.html");
 });
 
 // Game Routes
 
+// Returns the next random number for the game
+app.get("/bingo/gamecode", (req, res) => {
+  validNumber = false
+  while (!validNumber) {
+    newCode = Math.floor(Math.random() * 90000) + 10000;
+    if (!gameCodes.includes(newCode)) {
+      LOGGER.info('Next gameCode is: ' + newCode)
+      gameCodes.push(newCode)
+      validNumber = true
+      res.send(""+newCode)
+    }
+    else {
+      LOGGER.info('gameCode is already in use: ' + newCode)
+    }
+  }
+});
+
+
 // /called numbers retuns the list of numbers which have been called
 
-app.get("/callednumbers", (req, res) => {
+app.get("/bingo/callednumbers", (req, res) => {
   if (calledNumbers.length > 0) {
     var JsonList = JSON.stringify(calledNumbers);
     LOGGER.info('Current numbers are: ' + calledNumbers)
@@ -58,7 +81,7 @@ app.get("/callednumbers", (req, res) => {
 });
 
 // /Call allows a number to be called externally
-app.post('/call', (req, res) => {
+app.post('/bingo/call', (req, res) => {
   const click = { clickTime: new Date() };
   console.log(click);
   console.log('Got Number:', req.body);
@@ -69,7 +92,12 @@ app.post('/call', (req, res) => {
 });
 
 // Returns the next random number for the game
-app.get("/nextrand", (req, res) => {
+app.get("/bingo/nextrand", (req, res) => {
+
+
+// needs to check the list relating to a given gamecode
+
+  let gameCode = req.query.gamecode;
   validNumber = false
   while (!validNumber) {
     next = Math.floor(Math.random() * 78);
@@ -93,7 +121,7 @@ app.get("/nextrand", (req, res) => {
 
 // Resets the current game
 
-app.get("/newgame", (req, res) => {
+app.get("/bingo/newgame", (req, res) => {
   if (calledNumbers.length > 0) {
     calledNumbers = [];
   }
