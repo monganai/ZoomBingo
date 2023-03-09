@@ -93,8 +93,6 @@ app.post('/bingo/call', (req, res) => {
 
 // Returns the next random number for the game
 app.get("/bingo/nextrand", (req, res) => {
-
-
 // needs to check the list relating to a given gamecode
 
   let gameCode = req.query.gamecode;

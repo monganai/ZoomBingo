@@ -47,7 +47,7 @@ function nextRand() {
     }
 }
 function newGame() {
-    theUrl = urlSwitch+'/bingo/newgame'
+    theUrl = urlSwitch+'/bingo/reset?gamecode='+ gameCode
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false);
     xmlHttp.send(null);
