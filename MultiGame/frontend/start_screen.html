@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript" src="/scripts/start.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/frontend/start_screen.css" />
+
+<head>
+  <style>
+    .button {
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+
+    .button1 {
+      background-color: #0b2edc;
+    }
+  </style>
+
+</head>
+
+<title>Bingo</title>
+
+
+<body>
+
+
+  <p align="center"><iframe src="https://giphy.com/embed/z0JFNTUyOBx62XBLag" width="200" height="200" frameBorder="0"
+      class="giphy-embed"></iframe>
+  <p>
+
+    <div class="form">
+        <div class="title">Bingo</div>
+        <div class="subtitle">Let's get you in a game</div>
+        <div class="input-container ic1">
+          <input id="gamecode" class="input" type="text" placeholder=" " />
+          <div class="cut"></div>
+          <label for="gamecode" class="placeholder">Enter your game code</label>
+        </div>
+        <div class="input-container ic2">
+          <input id="username" class="input" type="text" placeholder=" " />
+          <div class="cut"></div>
+          <label for="username" class="placeholder">Enter a username</label>
+        </div>
+       
+        <button type="text" class="submit" onclick="onSubmit()">submit</button>
+      </div>
+
+ 
+
+</body>
+
+
+<footer>
+	<a href="http://localhost:3000/bingo/host"> Click here to host!</a>
+
+</footer>
+
+</html>

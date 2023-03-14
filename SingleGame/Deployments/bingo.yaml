@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bingo
+  labels:
+    tags.datadoghq.com/env: "dev"
+    tags.datadoghq.com/service: "bingo"
+    tags.datadoghq.com/version: "1.0"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bingo
+  template:
+    metadata:
+      labels:
+        app: bingo
+    spec:
+      containers:
+        - name: bingo
+          image: monganai/bingo:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DD_ENV
+              value: "dev"
+            - name: DD_RUNTIME_METRICS_ENABLED
+              value: "true"
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bingo
+spec:
+  selector:
+    app: bingo
+  ports:
+    - name: http
+      protocol: TCP
+      port: 3000
+      nodePort: 30011
+  type: LoadBalancer
+
+
+

@@ -1,0 +1,82 @@
+.button {
+    border: none;
+    color: rgb(147, 5, 179);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .button1 {
+    background-color: rgb(147, 5, 179);
+  }
+
+  body {
+    background: #aa0d83;
+    background-image: url('https://www.gsn.com/common/html/images/bingo_bg.png?v=1');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  p {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    padding-top: 15px;
+    font-size: 18pt;
+    font-weight: 600;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    max-width: 1000px;
+    inline-size: 1000px;
+    overflow-wrap: break-word;
+
+
+  }
+
+  div.a {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20pt;
+    font-weight: 300;
+    margin: 0 auto;
+    text-align: center;
+    padding: 15px;
+    color: white;
+    max-width: 1000px;
+    inline-size: 1000px;
+    overflow-wrap: break-word;
+  }
+
+
+
+
+
+  .buttons {
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    align-self: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+
+    }
+    
+        .action_btn {
+          border: none;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+          color:rgb(147, 5, 179)
+
+          
+          }

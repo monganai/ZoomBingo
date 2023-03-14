@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "promisify": "^0.0.3",
+    "redis": "^3.1.2",
+    "util.promisify": "^1.1.1"
+  }
+}
