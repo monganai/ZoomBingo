@@ -1,3 +1,4 @@
+
 var usedNums = new Array(76);
 var gameCode;
 
@@ -10,18 +11,15 @@ function initGame(){
    gameCode=code[code.length -1]
 }
 
-
 function newCard() {
     initGame()
     for (var i = 0; i < 24; i++) {
         setSquare(i);
     }
 }
-
 function setSquare(thisSquare) {
     var currSquare = "square" + thisSquare;
     var newNum;
-
     var colPlace = new Array(0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4);
 
     do {
@@ -35,14 +33,12 @@ function setSquare(thisSquare) {
 
 function getNewNum() {
     return Math.floor(Math.random() * 75);
-
 }
 
 function anotherCard() {
     for (var i = 1; i < usedNums.length; i++) {
         usedNums[i] = false;
     }
-
     newCard();
 }
 
@@ -65,7 +61,7 @@ function tableClick() {
 }
 
 function getCalledNums() {
-    theUrl = urlSwitch+'/bingo/callednumbers'
+    theUrl = urlSwitch+'/bingo/callednumbers?gamecode='+gameCode
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false); // false for synchronous request
     xmlHttp.send(null);
@@ -89,7 +85,9 @@ if (table != null) {
 
 var intervalId = window.setInterval(function () {
     response = getCalledNums()
-    if (response != "Temporary Redirect") {
+    console.log(response)
+    if (response != '"-1"') {
+        console.log(response)
         calledNums = response.split(',');
         number = calledNums[calledNums.length - 1]
         number = number.replace('[', '');
@@ -108,7 +106,7 @@ function validate() {
     myNums = [];
     calledNums = [];
     response = getCalledNums();
-    if (response != "Temporary Redirect") {
+    if (response != "Temporary Redirect"|| response == "-1") {
         response = response.slice(1, -1);
         calledNums = response.split(',');
 

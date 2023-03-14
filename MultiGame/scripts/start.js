@@ -1,4 +1,3 @@
-
 var urlSwitch = 'http://localhost:3000'
 //var urlSwitch = 'http://mongan.duckdns.org'
 
@@ -17,5 +16,4 @@ function isValidGameCode(code){
 
 return true;
 }
-
 
