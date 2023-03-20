@@ -1,6 +1,17 @@
+
+const TRACER = require('dd-trace').init({
+  service: 'bingo-multi',
+  version: '1.0',
+  logInjection: true,
+  debug: false,
+  profiling: true
+});
+
 const redis = require('redis');
 const express = require('express')
 const promisify = require('util.promisify');
+const logger = require('./logger');
+const log = logger.logger
 
 // create redis client
 const client = redis.createClient({
@@ -21,7 +32,7 @@ const PORT = process.env.PORT || 3000;
 // Main player page
 app.get("/bingo/play", (req, res) => {
   let gameCode = req.query.gamecode;
-  console.log('Got code:', gameCode);
+  log.info('Got code:', gameCode);
   res.sendFile(__dirname + "/frontend/player.html");
 });
 
@@ -40,7 +51,7 @@ app.get("/bingo/host", (req, res) => {
 
 app.get("/bingo/reset", async (req, res) => {
   await setAsync( req.query.gamecode, "-1" );
-  console.log("Restarting game : " + req.query.gamecode);
+  log.info("Restarting game : " + req.query.gamecode);
   res.sendStatus(200)
 });
 
@@ -77,8 +88,8 @@ app.get("/bingo/nextrand", async (req, res) => {
             res.sendStatus(307)
         }
       } catch (error) {
-        console.error(error);
-        return res.status(500).json({ success: false, error });
+        log.error(error);
+        //return res.status(500).json({ success: false, error });
       }
   });
 
@@ -95,12 +106,12 @@ app.get("/bingo/callednumbers", async (req, res) => {
       res.send(JsonList)
     } else {
     res.send("No results")
-    console.log("no results for gamecode");
+    log.warn("no results for gamecode");
     }
 
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ success: false, error });
+    log.error(error);
+    //return res.status(500).json({ success: false, error });
   }
 }
 
@@ -114,20 +125,20 @@ app.get("/bingo/gamecode", async (req, res) => {
 try {
     const getRes = await getAsync(newCode);
     if (getRes) {
-      console.log("gamecode already in use");
+      log.warn("gamecode already in use");
     }
     await setAsync( newCode, "-1" );
-    console.log("new Gamecode created:  " + newCode);
+    log.info("new Gamecode created:  " + newCode);
     validNumber = true
     res.send(""+newCode)
   } catch (error) {
-    console.error(error);
+    log.error(error);
     return res.status(500).json({ success: false, error });
   }
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  log.info(`Server running on http://localhost:${PORT}`);
 });
 app.use(express.static(__dirname));

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-bingo
+  labels:
+    project: bingo-multi
+    tags.datadoghq.com/service: "redis-bingo"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-bingo
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/redis-crypto.check_names: '["redisdb"]'
+        ad.datadoghq.com/redis-crypto.init_configs: '[{}]'
+        ad.datadoghq.com/redis-crypto.instances: '[{"host": "%%host%%","port":"%%port%%"}]'
+        ad.datadoghq.com/redis-crypto.logs: '[{"source":"redis","service":"redis-bingo"}]'
+      labels:
+        app: redis-bingo
+        tags.datadoghq.com/service: "redis-bingo"
+    spec:
+      containers:
+        - name: redis-bingo
+          image: redis:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 6379
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-bingo
+spec:
+  selector:
+    app: redis-bingo
+  ports:
+    - port: 6379
+      nodePort: 30010
+  type: LoadBalancer

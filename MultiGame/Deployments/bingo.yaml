@@ -1,51 +1,57 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bingo
+  name: bingo-multi
   labels:
-    tags.datadoghq.com/env: "dev"
-    tags.datadoghq.com/service: "bingo"
+    tags.datadoghq.com/env: "prod"
+    tags.datadoghq.com/service: "bingo-multi"
     tags.datadoghq.com/version: "1.0"
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: bingo
+      app: bingo-multi
   template:
     metadata:
       labels:
-        app: bingo
+        app: bingo-multi
     spec:
       containers:
-        - name: bingo
-          image: monganai/bingo:latest
+        - name: bingo-multi
+          image: localhost:32000/bingo-multi:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
           env:
             - name: DD_ENV
-              value: "dev"
+              value: "prod"
             - name: DD_RUNTIME_METRICS_ENABLED
               value: "true"
             - name: DD_AGENT_HOST
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
+            - name: REDIS_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: REDIS_PORT
+              value: "30010"
 
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: bingo
+  name: bingo-multi
 spec:
   selector:
-    app: bingo
+    app: bingo-multi
   ports:
     - name: http
       protocol: TCP
       port: 3000
-      nodePort: 30011
+      nodePort: 30017
   type: LoadBalancer
 
 

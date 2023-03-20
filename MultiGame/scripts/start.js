@@ -1,5 +1,5 @@
-var urlSwitch = 'http://localhost:3000'
-//var urlSwitch = 'http://mongan.duckdns.org'
+//var urlSwitch = 'http://localhost:3000'
+var urlSwitch = 'http://mongan.duckdns.org'
 
 
 function onSubmit(){
